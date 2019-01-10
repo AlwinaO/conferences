@@ -13,4 +13,16 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
+  helpers do
+
+    def logged_in? # will return a boolean value
+      !!current_user
+    end
+
+    def current_user #this will return a user based on the session id or nil
+      @current_user ||= User.find_by(id: session[:user_id]) #used memoization to limit the number of database calls; if the value is stored in @current_user then we don't have to query the database to find the user.
+
+    end
+  end
+
 end
