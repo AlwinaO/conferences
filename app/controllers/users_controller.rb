@@ -22,14 +22,30 @@ class UsersController < ApplicationController
     end
   end
 
+  # Route for  signup
+  # Render the signup form
+  get '/signup' do
+    erb :signup
+
+  end
+
+  post '/users' do
+    # params will be {"name"=>"user", "email"=>"user@email.com", "password"=>"password"}
+    # only persist new user with name, email and password
+    if params[:name] != "" && params[:email] != "" && params[:name] != ""
+      @user = User.new(params)
+      redirect "/users/#{@user.id}"
+    else
+      # not valid input
+    end
+
+  end
+
   get '/users/:id' do
     "this is the user's show page"
 
   end
 
-  # Route for  signup
-  get '/signup' do
 
-  end
 
 end
