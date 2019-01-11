@@ -17,8 +17,10 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect "/users/#{@user.id}"
     else
-    # tell the user they entered invalid credentials
+    # tell the user they entered invalid credentials - add flash message
     # redirect to the login page
+    redirect "/login"
+
     end
   end
 
@@ -34,18 +36,28 @@ class UsersController < ApplicationController
     # only persist new user with name, email and password
     if params[:name] != "" && params[:email] != "" && params[:name] != ""
       @user = User.new(params)
+      @user.save # persist the user to the database
+      session[:user_id] = @user.id # login the user
       redirect "/users/#{@user.id}"
     else
       # not valid input
+      # tell the user they entered invalid credentials - add flash message
+      # redirect to the login page
+      redirect "/signup"
     end
 
   end
 
   get '/users/:id' do
-    "this is the user's show page"
-
+    # raise params.inspect
+    @user = User.find_by(id: params[:id])
+    # binding.pry
+    erb :'/users/show'
   end
 
-
+  get '/logout' do
+    session.clear
+    redirect '/'
+  end
 
 end
