@@ -10,6 +10,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
+    # change this to a conferences web page
     erb :welcome
   end
 
