@@ -11,7 +11,11 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     # change this to a conferences web page
-    erb :welcome
+    if logged_in?
+      redirect "/users/#{current_user.id}"
+    else
+      erb :welcome
+    end
   end
 
   helpers do
