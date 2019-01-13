@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   post '/users' do
     # params will be {"name"=>"user", "email"=>"user@email.com", "password"=>"password"}
     # only persist new user with name, email and password
-    if params[:name] != "" && params[:email] != "" && params[:name] != ""
+    if params[:name] != "" && params[:email] != "" && params[:password] != ""
       @user = User.new(params)
       @user.save # persist the user to the database
       session[:user_id] = @user.id # login the user
