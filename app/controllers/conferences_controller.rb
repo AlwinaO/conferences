@@ -1,5 +1,11 @@
 class ConferencesController < ApplicationController
 
+  # index route for all conferences
+  get '/conferences' do
+    @conferences = Conference.all
+    erb :'/conferences/index'
+  end
+
   # get conferences/new to render a form to create a new conference
   get '/conferences/new' do
     erb :'/conferences/new'
@@ -10,11 +16,14 @@ class ConferencesController < ApplicationController
     # raise params.inspect
     # {"name"=>"Codeland", "location"=>"New York", "category"=>"Code Newbies", "date"=>"5/5/2019"}
     # create the entry if a user is logged in
-    if !logged_in?
-      redirect '/'
+    # if !logged_in?
+    #   binding.pry
+    #   redirect '/'
+    # end
     # save the entry if it has a name, location, category and date
-    elsif params[:name] != "" && params[:location] != "" && params[:category] != "" && params[:date] != ""
-      @conference = Conference.create(params)
+    if params[:name] != "" && params[:location] != "" && params[:category] != "" && params[:date] != ""
+
+      @conference = Conference.create(name: params[:name], location: params[:location], category: params[:category], date: params[:date])
       redirect "/conferences/#{@conference.id}"
     end
 
@@ -22,12 +31,8 @@ class ConferencesController < ApplicationController
 
   # show route for one conference
   get '/conferences/:id' do
+    @conference = Conference.find_by(id: params[:id])
     erb :'/conferences/show'
-  end
-
-  # index route for all conferences
-  get '/conferences' do
-    erb :'/conferences/index'
   end
 
 
