@@ -16,15 +16,16 @@ class ConferencesController < ApplicationController
     # raise params.inspect
     # {"name"=>"Codeland", "location"=>"New York", "category"=>"Code Newbies", "date"=>"5/5/2019"}
     # create the entry if a user is logged in
-    # if !logged_in?
-    #   binding.pry
-    #   redirect '/'
-    # end
+      binding.pry
+    if !logged_in?
+      redirect '/'
+    end
     # save the entry if it has a name, location, category and date
     if params[:name] != "" && params[:location] != "" && params[:category] != "" && params[:date] != ""
-
       @conference = Conference.create(name: params[:name], location: params[:location], category: params[:category], date: params[:date])
       redirect "/conferences/#{@conference.id}"
+    else
+      redirect "conferences/new"
     end
 
   end
