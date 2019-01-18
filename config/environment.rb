@@ -1,4 +1,5 @@
 ENV['SINATRA_ENV'] ||= "development"
+ENV['SESSION_SECRET'] ||= "wakanda4ever"
 
 require 'bundler/setup'
 Bundler.require(:default, ENV['SINATRA_ENV'])
