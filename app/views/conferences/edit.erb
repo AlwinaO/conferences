@@ -1,0 +1,20 @@
+<h2>Edit a Conference</h2>
+
+<form action="/conferences/<%= @conference.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+  <label for="name">Name: </label>
+  <input type="text" name="name" value="<%= @conference.name %>"><br><br>
+
+  <label for="location">Location: </label>
+  <input type="text" name="location" value="<%= @conference.location %>"><br><br>
+
+  <label for="category">Category: </label>
+  <input type="text" name="category" value="<%= @conference.category %>"><br><br>
+
+  <label for="date">Date: </label>
+  <input type="text" name="date" value="<%= @conference.date %>"><br><br>
+
+  <input type="submit" value="Edit Conference">
+
+</form>
