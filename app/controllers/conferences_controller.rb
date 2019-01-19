@@ -38,16 +38,33 @@ class ConferencesController < ApplicationController
   # route to edit a conference
   get '/conferences/:id/edit' do
     set_conference_entry
-    erb :'/conferences/edit'
+      if logged_in?
+        if @conference.user == current_user
+          erb :'/conferences/edit'
+        else
+          redirect "users/#{current_user.id}"
+        end
+      else
+        redirect '/'
+    end
   end
 
   # this route updates the conference
   patch '/conferences/:id' do
     # find the conference
     set_conference_entry
-    # modify
-    @conference.update(params[:id])
-
+    # modify the conference
+    # binding.pry
+    if logged_in?
+      if @conference.user == current_user
+        @conference.update(name: params[:name], location: params[:location], category: params[:category], date: params[:date])
+        redirect "/conferences/#{@conference.id}"
+      else
+        redirect "users/#{current_user.id}"
+      end
+    else
+      redirect '/'
+    end
   end
 
 
