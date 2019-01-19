@@ -31,24 +31,37 @@ class ConferencesController < ApplicationController
 
   # show route for one conference
   get '/conferences/:id' do
-    @conference = Conference.find_by(id: params[:id])
+    set_conference_entry
     erb :'/conferences/show'
   end
 
   # route to edit a conference
   get '/conferences/:id/edit' do
-
+    set_conference_entry
     erb :'/conferences/edit'
+  end
+
+  # this route updates the conference
+  patch '/conferences/:id' do
+    # find the conference
+    set_conference_entry
+    # modify
+    @conference.update(params[:id])
+
   end
 
 
 # route to delete a conference
   get '/conferences/:id/delete' do
-    @conference = Conference.find_by(id: params[:id])
+    set_conference_entry
     erb :'/conferences/delete'
 
   end
 
+  private
 
+  def set_conference_entry
+    @conference = Conference.find_by(id: params[:id])
+  end
 
 end
