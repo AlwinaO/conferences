@@ -35,5 +35,20 @@ class ConferencesController < ApplicationController
     erb :'/conferences/show'
   end
 
+  # route to edit a conference
+  get '/conferences/:id/edit' do
+
+    erb :'/conferences/edit'
+  end
+
+
+# route to delete a conference
+  get '/conferences/:id/delete' do
+    @conference = Conference.find_by(id: params[:id])
+    erb :'/conferences/delete'
+
+  end
+
+
 
 end
