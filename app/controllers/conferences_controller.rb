@@ -69,9 +69,11 @@ class ConferencesController < ApplicationController
 
 
 # route to delete a conference
-  get '/conferences/:id/delete' do
+  delete '/conferences/:id' do
     set_conference_entry
-    erb :'/conferences/delete'
+    # binding.pry
+    @conference.destroy
+    redirect "/conferences"
 
   end
 
