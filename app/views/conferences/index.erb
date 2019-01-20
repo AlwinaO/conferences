@@ -4,8 +4,8 @@
   <% @conferences.each do |conference| %>
   <li>
     <a href="/conferences/<%= conference.id %>">
-      <%= conference.name %>
-    </a>
+      <p><%= conference.name %></p>
+      </a>
   </li>
   <% end %>
 </ol>
