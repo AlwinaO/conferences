@@ -11,4 +11,9 @@
 
 <a href="/conferences/<%= @conference.id %>/edit">Edit Conference</a>
 
-<a href="/conferences/<%= @conference.id %>/edit">Delete Conference</a>
+<a href="/conferences/<%= @conference.id %>">
+  <form action="/conferences/<%= @conference.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" id="delete" value="Delete Conference">
+  </form>
+</a>
