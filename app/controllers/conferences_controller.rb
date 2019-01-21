@@ -39,7 +39,7 @@ class ConferencesController < ApplicationController
   get '/conferences/:id/edit' do
     set_conference_entry
       if logged_in?
-        if @conference.user == current_user
+        if authorized_to_edit?(@conference)
           erb :'/conferences/edit'
         else
           redirect "users/#{current_user.id}"
@@ -56,7 +56,7 @@ class ConferencesController < ApplicationController
     # modify the conference
     # binding.pry
     if logged_in?
-      if @conference.user == current_user
+      if authorized_to_edit?(@conference)
         @conference.update(name: params[:name], location: params[:location], category: params[:category], date: params[:date])
         redirect "/conferences/#{@conference.id}"
       else
