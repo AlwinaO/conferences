@@ -6,6 +6,8 @@
     <a href="/conferences/<%= conference.id %>">
       <p><%= conference.name %></p>
       </a>
+      <p>Date: <%= conference.date %> </p>
+      <p>Added by: <%= conference.user.name %> </p>
   </li>
   <% end %>
 </ol>
