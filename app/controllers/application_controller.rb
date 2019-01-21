@@ -26,7 +26,10 @@ class ApplicationController < Sinatra::Base
 
     def current_user #this will return a user based on the session id or nil
       @current_user ||= User.find_by(id: session[:user_id]) #used memoization to limit the number of database calls; if the value is stored in @current_user then we don't have to query the database to find the user.
+    end
 
+    def authorized_to_edit?(conference)
+       conference.user == current_user
     end
   end
 
