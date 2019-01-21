@@ -21,7 +21,7 @@ tchalla = User.create(name: "T'Challa", email: "tchalla@bp.com", password: "waka
 
 #create conferences
 
-Conference.create(name: "Grace Hopper Celebration", date: 10-02-2019, category: "women", location: "Orlando, FL", user_id: alice.id)
+Conference.create(name: "Grace Hopper Celebration", date: 10-2-2019, category: "women", location: "Orlando, FL", user_id: alice.id)
 
 oscar.conferences.create(name: "O'Reilly Velocity Conf", date: 6-10-2019, category: "coding", location: "San Jose, CA")
 
@@ -29,7 +29,7 @@ Conference.create(name: "Dash by Datadog", date: 7-10-2019, category: "coding", 
 
 sharell.conferences.create(name: "SXSW", date: 3-18-2019, category: "mixed", location: "Austin, TX")
 
-Conference.create(name: "Red Hat Summit", date: 5-07-2019, category: "open source", location: "San Francisco, CA", user_id: danny.id)
+Conference.create(name: "Red Hat Summit", date: 5-7-2019, category: "open source", location: "San Francisco, CA", user_id: danny.id)
 
 lauren.conferences.create(name: "JupyterCon", date: 8-19-2019, category: "coding", location: "NYC")
 
