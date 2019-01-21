@@ -71,10 +71,12 @@ class ConferencesController < ApplicationController
 # route to delete a conference
   delete '/conferences/:id' do
     set_conference_entry
-    # binding.pry
-    @conference.destroy
-    redirect "/conferences"
-
+    if authorized_to_edit?(@conference)
+      @conference.destroy
+      redirect "/conferences"
+    else
+      redirect "/conferences"
+    end
   end
 
   private
