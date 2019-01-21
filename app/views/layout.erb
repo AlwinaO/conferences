@@ -24,10 +24,12 @@
     </header>
 
     <nav>
+      <% if logged_in? %>
       <a href="/logout">Logout</a>
       <a href="/conferences">Conferences</a>
       <a href="/conferences/new">Add a New Conference</a>
       <!-- <a href="#"></a> -->
+      <% end %> 
     </nav>
     <div class="wrapper">
 
