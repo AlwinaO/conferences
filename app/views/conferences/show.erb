@@ -11,7 +11,7 @@
 
 <% if authorized_to_edit?(@conference) %>
 
-<a href="/conferences/<%= @conference.id %>/edit">Edit Conference</a>
+<a href="/conferences/<%= @conference.id %>/edit">Edit Conference</a><br><br>
 
 <a href="/conferences/<%= @conference.id %>">
   <form action="/conferences/<%= @conference.id %>" method="post">
