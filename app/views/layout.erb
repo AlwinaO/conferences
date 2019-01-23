@@ -29,9 +29,15 @@
       <a href="/conferences">Conferences</a>
       <a href="/conferences/new">Add a New Conference</a>
       <!-- <a href="#"></a> -->
-      <% end %> 
+      <% end %>
     </nav>
+
     <div class="wrapper">
+      <% if flash[:message] %>
+        <h4> <%= flash[:message] %> </h4><br><br>
+
+      <% end %>
+
 
         <%= yield %>
 
