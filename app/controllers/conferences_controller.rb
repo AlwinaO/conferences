@@ -21,9 +21,11 @@ class ConferencesController < ApplicationController
     end
     # save the entry if it has a name, location, category and date
     if params[:name] != "" && params[:location] != "" && params[:category] != "" && params[:date] != ""
+      flash[:message] = "You have successfully created a new conference."
       @conference = Conference.create(name: params[:name], location: params[:location], category: params[:category], date: params[:date], user_id: current_user.id)
       redirect "/conferences/#{@conference.id}"
     else
+      flash[:message] = "Please complete all fields."
       redirect "conferences/new"
     end
 
