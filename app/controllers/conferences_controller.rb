@@ -56,7 +56,7 @@ class ConferencesController < ApplicationController
     # modify the conference
     # binding.pry
     if logged_in?
-      if authorized_to_edit?(@conference)
+      if authorized_to_edit?(@conference) && params[:name] != "" && params[:location] != "" && params[:category] != "" && params[:date] != ""
         @conference.update(name: params[:name], location: params[:location], category: params[:category], date: params[:date])
         redirect "/conferences/#{@conference.id}"
       else
