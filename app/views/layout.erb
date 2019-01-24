@@ -35,9 +35,11 @@
     <div class="wrapper">
       <% if flash[:message] %>
         <h4> <%= flash[:message] %> </h4><br><br>
-
       <% end %>
 
+      <% if flash[:errors] %>
+        <h4> <%= flash[:errors] %> </h4><br><br>
+      <% end %>
 
         <%= yield %>
 
