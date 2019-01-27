@@ -16,16 +16,14 @@ class ConferencesController < ApplicationController
     # raise params.inspect
     # {"name"=>"Codeland", "location"=>"New York", "category"=>"Code Newbies", "date"=>"5/5/2019"}
     # create the entry if a user is logged in
-    if !logged_in?
-      redirect '/'
-    end
+    redirect_if_not_logged_in
     # save the entry if it has a name, location, category and date
     if params[:name] != "" && params[:location] != "" && params[:category] != "" && params[:date] != ""
       flash[:message] = "You have successfully created a new conference."
       @conference = Conference.create(name: params[:name], location: params[:location], category: params[:category], date: params[:date], user_id: current_user.id)
       redirect "/conferences/#{@conference.id}"
     else
-      flash[:message] = "Please complete all fields."
+      flash[:errors] = "Please complete all fields."
       redirect "conferences/new"
     end
 
@@ -40,14 +38,11 @@ class ConferencesController < ApplicationController
   # route to edit a conference
   get '/conferences/:id/edit' do
     set_conference_entry
-      if logged_in?
-        if authorized_to_edit?(@conference)
-          erb :'/conferences/edit'
-        else
-          redirect "users/#{current_user.id}"
-        end
-      else
-        redirect '/'
+    redirect_if_not_logged_in
+    if authorized_to_edit?(@conference)
+      erb :'/conferences/edit'
+    else
+      redirect "users/#{current_user.id}"
     end
   end
 
@@ -57,15 +52,12 @@ class ConferencesController < ApplicationController
     set_conference_entry
     # modify the conference
     # binding.pry
-    if logged_in?
-      if authorized_to_edit?(@conference) && params[:name] != "" && params[:location] != "" && params[:category] != "" && params[:date] != ""
-        @conference.update(name: params[:name], location: params[:location], category: params[:category], date: params[:date])
-        redirect "/conferences/#{@conference.id}"
-      else
-        redirect "users/#{current_user.id}"
-      end
+    redirect_if_not_logged_in
+    if authorized_to_edit?(@conference) && params[:name] != "" && params[:location] != "" && params[:category] != "" && params[:date] != ""
+      @conference.update(name: params[:name], location: params[:location], category: params[:category], date: params[:date])
+      redirect "/conferences/#{@conference.id}"
     else
-      redirect '/'
+      redirect "users/#{current_user.id}"
     end
   end
 
@@ -75,6 +67,7 @@ class ConferencesController < ApplicationController
     set_conference_entry
     if authorized_to_edit?(@conference)
       @conference.destroy
+      flash[:message] = "The conference has been deleted."
       redirect "/conferences"
     else
       redirect "/conferences"
