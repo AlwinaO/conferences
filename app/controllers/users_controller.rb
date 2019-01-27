@@ -54,6 +54,7 @@ class UsersController < ApplicationController
   get '/users/:id' do
     # raise params.inspect
     @user = User.find_by(id: params[:id])
+    redirect_if_not_logged_in
     # binding.pry
     erb :'/users/show'
   end
