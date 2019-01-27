@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       # not valid input
       # tell the user they entered invalid credentials - add flash message
       # redirect to the login page
-      flash[:errors] = "Account creation failure. Please complete all fields."
+      flash[:errors] = "Account creation failure: #{@user.errors.full_messages.to_sentence}."
       redirect "/signup"
     end
 
