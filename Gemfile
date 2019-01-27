@@ -13,6 +13,7 @@ gem 'bcrypt'
 gem "tux"
 gem "sysrandom"
 gem 'sinatra-flash', '~> 0.3.0'
+gem 'date'
 
 group :test do
   gem 'rspec'
