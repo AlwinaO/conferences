@@ -40,11 +40,13 @@ class UsersController < ApplicationController
       @user = User.new(params)
       @user.save # persist the user to the database
       session[:user_id] = @user.id # login the user
+      flash[:message] = "You have successfully created an account #{@user.name}! Welcome!"
       redirect "/users/#{@user.id}"
     else
       # not valid input
       # tell the user they entered invalid credentials - add flash message
       # redirect to the login page
+      flash[:errors] = "Account creation failure. Please complete all fields."
       redirect "/signup"
     end
 
