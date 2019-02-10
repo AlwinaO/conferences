@@ -58,25 +58,23 @@ class ConferencesController < ApplicationController
     # modify the conference
     # binding.pry
     redirect_if_not_logged_in
-    if authorized_to_edit?(@conference) && params[:name] != "" && params[:location] != "" && params[:category] != "" && params[:date] != ""
-      @conference.update(name: params[:name], location: params[:location], category: params[:category], date: params[:date])
-      redirect "/conferences/#{@conference.id}"
-    else
-      redirect "users/#{current_user.id}"
-    end
+    redirect_if_not_authorized_to_edit(@conference)
+      if params[:name] != "" && params[:location] != "" && params[:category] != "" && params[:date] != ""
+        @conference.update(name: params[:name], location: params[:location], category: params[:category], date: params[:date])
+        redirect "/conferences/#{@conference.id}"
+      else
+        redirect "/conferences/#{@conference.id}/edit"
+      end
   end
 
 
 # route to delete a conference
   delete '/conferences/:id' do
     set_conference_entry
-    if authorized_to_edit?(@conference)
+    redirect_if_not_authorized_to_edit(@conference)
       @conference.destroy
       flash[:message] = "The conference has been deleted."
       redirect "/conferences"
-    else
-      redirect "/conferences"
-    end
   end
 
   private
