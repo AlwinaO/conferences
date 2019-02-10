@@ -2,12 +2,14 @@ class ConferencesController < ApplicationController
 
   # index route for all conferences
   get '/conferences' do
+    redirect_if_not_logged_in
     @conferences = Conference.all
     erb :'/conferences/index'
   end
 
   # get conferences/new to render a form to create a new conference
   get '/conferences/new' do
+    redirect_if_not_logged_in
     erb :'/conferences/new'
   end
 
@@ -39,11 +41,13 @@ class ConferencesController < ApplicationController
   get '/conferences/:id/edit' do
     set_conference_entry
     redirect_if_not_logged_in
-    if authorized_to_edit?(@conference)
-      erb :'/conferences/edit'
-    else
-      redirect "users/#{current_user.id}"
-    end
+    redirect_if_not_authorized_to_edit(@conference)
+    erb :'/conferences/edit'
+    # if authorized_to_edit?(@conference)
+    #   erb :'/conferences/edit'
+    # else
+    #   redirect "users/#{current_user.id}"
+    # end
   end
 
   # this route updates the conference
