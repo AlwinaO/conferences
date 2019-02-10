@@ -34,6 +34,7 @@ class ConferencesController < ApplicationController
   # show route for one conference
   get '/conferences/:id' do
     set_conference_entry
+    redirect_if_not_logged_in
     erb :'/conferences/show'
   end
 
