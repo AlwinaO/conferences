@@ -28,8 +28,7 @@
       <a href="/logout">Logout</a>
       <a href="/conferences">Conferences</a>
       <a href="/conferences/new">Add a New Conference</a>
-      <!-- <a href="/users/show">Your Conferences</a> update to show user's conference list-->
-
+      <a href="/users/<%= current_user.id %>">My Conferences</a>
       <% end %>
     </nav>
 
