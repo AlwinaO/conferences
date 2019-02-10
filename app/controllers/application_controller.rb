@@ -37,7 +37,14 @@ class ApplicationController < Sinatra::Base
       if !logged_in?
         flash[:errors] = "You must be logged in to view that page."
         redirect '/'
-      end 
+      end
+    end
+
+    def redirect_if_not_authorized_to_edit(conference)
+       if !authorized_to_edit?(conference)
+         flash[:errors] = "You must be the user to edit that conference."
+         redirect '/'
+      end
     end
 
 
