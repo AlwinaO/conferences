@@ -33,8 +33,11 @@ class ConferencesController < ApplicationController
 
   # show route for one conference
   get '/conferences/:id' do
-    set_conference_entry
     redirect_if_not_logged_in
+    if !set_conference_entry
+      flash[:errors] = "Please select a conference from the list on the conferences page."
+      redirect "/conferences"
+    end
     erb :'/conferences/show'
   end
 
