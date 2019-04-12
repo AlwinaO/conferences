@@ -12,6 +12,15 @@ For a walkthrough of how the app works, view here: https://youtu.be/HIgFHaqZkYo
 
 ![conferences](https://user-images.githubusercontent.com/22036904/52188785-b304e980-2802-11e9-8f67-3c297a929d6c.gif)
 
+## Future updates to app
+
+- Add google maps
+- Migrate database to PostgreSQL 
+- Add tests
+- Deploy to Heroku
+- Add bootstrap 
+
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/AlwinaO/conferences. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
